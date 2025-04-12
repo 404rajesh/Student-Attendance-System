@@ -1,0 +1,90 @@
+/* Reset some defaults */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #74ebd5, #acb6e5); /* light blue-purple gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Main container */
+  .login-container {
+    background: #ffffff;
+    padding: 2.5rem 3.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    transition: transform 0.3s ease;
+  }
+  
+  .login-container:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Title */
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  /* Input elements */
+  .login-container select,
+  .login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 0.7rem 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.3s;
+  }
+  
+  .login-container input:focus,
+  .login-container select:focus {
+    border-color: #4c8bf5;
+    outline: none;
+  }
+  
+  /* Button */
+  .login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4c8bf5;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.3s;
+  }
+  
+  .login-container button:hover {
+    background-color: #356ac3;
+  }
+  
+  /* Links */
+  .login-container .extra-links {
+    text-align: center;
+    margin-top: 1.2rem;
+  }
+  
+  .login-container .extra-links a {
+    color: #4c8bf5;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .login-container .extra-links a:hover {
+    text-decoration: underline;
+  }
+  

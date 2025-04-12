@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="css/student-dashboard.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-left">
+      <h2>Student Dashboard</h2>
+    </div>
+    <div class="navbar-right">
+      <span class="student-info">Name: Rajesh Kumar Jha | Roll: 2025CS123</span>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <div class="card-container">
+      <div class="card" onclick="handleAction('qr')">
+        <h2>📷 Scan QR Code</h2>
+        <p>Quickly mark attendance via QR scan</p>
+      </div>
+      <div class="card" onclick="handleAction('code')">
+        <h2>🔢 Enter Code</h2>
+        <p>Submit attendance manually using code</p>
+      </div>
+      <div class="card" onclick="handleAction('records')">
+        <h2>📊 View Records</h2>
+        <p>Check your attendance history</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/student-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(to right, #dbe6f6, #c5796d);
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    background-color: #4c4c6d;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logout-btn {
+    background-color: #f2545b;
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d63b44;
+  }
+  
+  .dashboard-container {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    width: 280px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card h2 {
+    margin-bottom: 0.5rem;
+    color: #4c4c6d;
+  }
+  
+  .card p {
+    color: #777;
+  }
+  

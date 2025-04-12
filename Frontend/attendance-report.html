@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attendance Report</title>
+  <link rel="stylesheet" href="css/attendance-report.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Attendance Reports</h1>
+    
+    <div class="tab-buttons">
+      <button onclick="showTab('student')">Student Report</button>
+      <button onclick="showTab('teacher')">Teacher Report</button>
+      <button onclick="showTab('overall')">Overall Analytics</button>
+    </div>
+
+    <div id="student" class="tab-content">
+      <h2>Student Attendance Report</h2>
+      <input type="text" id="student-search" placeholder="Enter student name or ID">
+      <button onclick="searchStudent()">Search</button>
+      <div id="student-result"></div>
+    </div>
+
+    <div id="teacher" class="tab-content" style="display: none;">
+      <h2>Teacher Attendance Report</h2>
+      <input type="text" id="teacher-search" placeholder="Enter teacher name or ID">
+      <button onclick="searchTeacher()">Search</button>
+      <div id="teacher-result"></div>
+    </div>
+
+    <div id="overall" class="tab-content" style="display: none;">
+      <h2>Overall Analytics</h2>
+      <label>Date From:</label>
+      <input type="date" id="from-date">
+      <label>Date To:</label>
+      <input type="date" id="to-date">
+      <button onclick="generateAnalytics()">Generate</button>
+      <div id="analytics-result"></div>
+      <button onclick="exportAnalytics()">Export</button>
+    </div>
+  </div>
+
+  <script src="js/attendance-report.js"></script>
+</body>
+</html>

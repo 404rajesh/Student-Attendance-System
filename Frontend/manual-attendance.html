@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manual Attendance</title>
+  <link rel="stylesheet" href="css/manual-attendance.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Manual Attendance</h1>
+
+    <table id="attendanceTable">
+      <thead>
+        <tr>
+          <th>Roll No</th>
+          <th>Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="studentList">
+        <!-- Students will be rendered here -->
+      </tbody>
+    </table>
+
+    <div class="buttons">
+      <button onclick="submitAttendance()">Submit</button>
+      <button onclick="goBack()">Back to Dashboard</button>
+    </div>
+  </div>
+
+  <script src="js/manual-attendance.js"></script>
+</body>
+</html>

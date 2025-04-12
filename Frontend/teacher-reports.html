@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teacher Reports</title>
+  <link rel="stylesheet" href="css/teacher-reports.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Teacher Reports</h1>
+    <div class="buttons">
+      <button onclick="showTab('percentage')">Attendance Summary</button>
+      <button onclick="showTab('live')">Live Attendance</button>
+      </div>
+    
+
+    <!-- Attendance Percentage Tab -->
+    <div id="percentage" class="tab-content">
+      <h2>Attendance Percentage by Date</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Attendance %</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="percentageTable">
+          <tr>
+            <td>John Doe</td>
+            <td>92%</td>
+            <td>2025-04-11</td>
+          </tr>
+          <tr>
+            <td>Jane Smith</td>
+            <td>85%</td>
+            <td>2025-04-11</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Live Attendance Tracking Tab -->
+    <div id="live" class="tab-content" style="display: none;">
+      <h2>Live Attendance</h2>
+      <ul id="liveList" class="live-list">
+        <!-- JS will populate this list dynamically -->
+      </ul>
+    </div>
+    <br>
+    <a href="teacher-attendance-report.html" class="btn-link">View Attendance Register</a>
+
+  </div>
+
+
+  <script src="js/teacher-reports.js"></script>
+</body>
+</html>

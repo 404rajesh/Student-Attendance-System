@@ -1,0 +1,51 @@
+body {
+    font-family: sans-serif;
+    background-color: #eef4fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    text-align: center;
+    background: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  
+  button {
+    padding: 12px 24px;
+    border: none;
+    background-color: #4c8bf5;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #3a6ed8;
+  }
+  
+  #qrSection {
+    margin-top: 30px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .back-btn {
+    background-color: #ccc;
+    margin-top: 40px;
+  }
+  
+  .back-btn:hover {
+    background-color: #bbb;
+  }
+  

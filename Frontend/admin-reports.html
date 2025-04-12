@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Reports</title>
+  <link rel="stylesheet" href="css/admin-reports.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Reports Panel</h1>
+
+    <div class="summary-cards">
+      <div class="card">
+        <h2>Overall Attendance</h2>
+        <p>91.3%</p>
+      </div>
+      <div class="card">
+        <h2>Departments</h2>
+        <p>12</p>
+      </div>
+      <div class="card">
+        <h2>Total Students</h2>
+        <p>1200+</p>
+      </div>
+      <div class="card">
+        <h2>Total Teachers</h2>
+        <p>80+</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Department-Wise Attendance Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Department</th>
+            <th>Avg. Attendance</th>
+            <th>Students</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CSE</td>
+            <td>93%</td>
+            <td>350</td>
+          </tr>
+          <tr>
+            <td>ECE</td>
+            <td>89%</td>
+            <td>280</td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Students Frequently Absent</h2>
+      <ul>
+        <li>John Doe - 45% attendance</li>
+        <li>Jane Smith - 50% attendance</li>
+        <!-- More -->
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Export Reports</h2>
+      <button class="btn">Export as CSV</button>
+      <button class="btn">Export as PDF</button>
+    </div>
+
+    <br />
+    <a href="admin-dashboard.html" class="btn-link">Back to Admin Dashboard</a>
+  </div>
+
+  <script src="js/admin-reports.js"></script>
+</body>
+</html>

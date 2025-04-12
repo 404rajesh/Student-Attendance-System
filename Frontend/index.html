@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Student Attendance System</title>
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Student Attendance System</h2>
+
+    <select name="role" id="role">
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+      <option value="admin">Admin</option>
+    </select>
+
+    <input type="text" id="username" placeholder="Email or Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+
+    <button onclick="handleLogin()">Login</button>
+
+    <div class="extra-links">
+      <a href="#">Forgot Password?</a>
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

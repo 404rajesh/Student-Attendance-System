@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Attendance Report</title>
+  <link rel="stylesheet" href="css/teacher-attendance-report.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Attendance Register</h1>
+
+    <div class="controls">
+      <button onclick="exportToCSV()">Export CSV</button>
+    </div>
+
+    <div class="table-container" id="attendanceTableContainer">
+      <!-- Table will be injected here -->
+    </div>
+
+    <div class="back-button">
+      <button onclick="goBack()">← Back to Dashboard</button>
+    </div>
+  </div>
+
+  <script src="js/teacher-attendance-report.js"></script>
+</body>
+</html>
