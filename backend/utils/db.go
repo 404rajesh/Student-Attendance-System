@@ -8,9 +8,9 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// Initialize the database
 var DB *sql.DB
 
+// Initialize the database
 func InitDB() {
 	var err error
 	DB, err = sql.Open("sqlite3", "./attendance.db")
@@ -28,30 +28,100 @@ func InitDB() {
 	);
 	`
 
+	// Create attendance table
+	createAttendanceTable := `
+	CREATE TABLE IF NOT EXISTS attendance (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		user_id INTEGER,
+		date TEXT NOT NULL,
+		status TEXT CHECK (status IN ('present', 'absent')),
+		FOREIGN KEY (user_id) REFERENCES users(id)
+	);
+	`
+
 	_, err = DB.Exec(createUserTable)
 	if err != nil {
 		log.Fatal("Failed to create users table:", err)
 	}
 
+	_, err = DB.Exec(createAttendanceTable)
+	if err != nil {
+		log.Fatal("Failed to create attendance table:", err)
+	}
+
 	fmt.Println("✅ Database initialized successfully.")
 }
 
-// AddUser adds a new user to the database
+// Add a new user to the database
 func AddUser(username, password, role string) error {
-	// Prepare the SQL statement
-	stmt, err := DB.Prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)")
-	if err != nil {
-		log.Println("Error preparing statement:", err)
-		return fmt.Errorf("failed to prepare statement: %w", err)
-	}
-	defer stmt.Close()
+	_, err := DB.Exec("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", username, password, role)
+	return err
+}
 
-	// Execute the statement
-	_, err = stmt.Exec(username, password, role)
+// Get a user by username
+func GetUserByUsername(username string) (User, error) {
+	var user User
+	row := DB.QueryRow("SELECT id, username, password, role FROM users WHERE username = ?", username)
+	err := row.Scan(&user.ID, &user.Username, &user.Password, &user.Role)
 	if err != nil {
-		log.Println("Error executing statement:", err)
-		return fmt.Errorf("failed to execute statement: %w", err)
+		return user, err
+	}
+	return user, nil
+}
+
+// Mark attendance for a user
+func MarkAttendance(userID, status, date string) error {
+	_, err := DB.Exec("INSERT INTO attendance (user_id, status, date) VALUES (?, ?, ?)", userID, status, date)
+	return err
+}
+
+// Get the attendance report for a specific student or date
+func GetAttendanceReport(studentID, date string) ([]Attendance, error) {
+	var query string
+	var rows *sql.Rows
+	var err error
+
+	if studentID != "" && date != "" {
+		query = "SELECT user_id, date, status FROM attendance WHERE user_id = ? AND date = ?"
+		rows, err = DB.Query(query, studentID, date)
+	} else if studentID != "" {
+		query = "SELECT user_id, date, status FROM attendance WHERE user_id = ?"
+		rows, err = DB.Query(query, studentID)
+	} else if date != "" {
+		query = "SELECT user_id, date, status FROM attendance WHERE date = ?"
+		rows, err = DB.Query(query, date)
+	} else {
+		query = "SELECT user_id, date, status FROM attendance"
+		rows, err = DB.Query(query)
 	}
 
-	return nil
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var attendance []Attendance
+	for rows.Next() {
+		var att Attendance
+		err := rows.Scan(&att.UserID, &att.Date, &att.Status)
+		if err != nil {
+			return nil, err
+		}
+		attendance = append(attendance, att)
+	}
+
+	return attendance, nil
+}
+
+type User struct {
+	ID       int    `json:"id"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Role     string `json:"role"`
+}
+
+type Attendance struct {
+	UserID int    `json:"user_id"`
+	Date   string `json:"date"`
+	Status string `json:"status"`
 }

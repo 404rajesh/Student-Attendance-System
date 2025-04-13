@@ -6,20 +6,32 @@
   <title>Login - Student Attendance System</title>
   <link rel="stylesheet" href="css/login.css" />
 </head>
+
+<!-- Toast container -->
+<div id="toast" class="toast">Message goes here</div>
+
+<!-- Loader -->
+<div id="loader" class="loader hidden"></div>
+
+<script src="js/login.js"></script>
+
 <body>
   <div class="login-container">
     <h2>Student Attendance System</h2>
 
-    <select name="role" id="role">
-      <option value="student">Student</option>
-      <option value="teacher">Teacher</option>
-      <option value="admin">Admin</option>
-    </select>
+    <!-- ✅ Add form wrapper -->
+    <form onsubmit="handleLogin(event)">
+      <select name="role" id="role" required>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+      </select>
 
-    <input type="text" id="username" placeholder="Email or Username" required />
-    <input type="password" id="password" placeholder="Password" required />
+      <input type="text" id="username" placeholder="Email or Username" required />
+      <input type="password" id="password" placeholder="Password" required />
 
-    <button onclick="handleLogin()">Login</button>
+      <button type="submit">Login</button>
+    </form>
 
     <div class="extra-links">
       <a href="#">Forgot Password?</a>
