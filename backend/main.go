@@ -11,7 +11,7 @@ import (
 // Enable CORS for all routes
 func enableCORS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")                            // Allow all origins
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST")                   // Allow methods
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")  // Allow methods
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization") // Allow headers
 }
 
@@ -76,6 +76,8 @@ func main() {
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/addUser", addUserHandler)
 	http.HandleFunc("/login", loginHandler) // Handle login (includes CORS)
+	http.HandleFunc("/markAttendance", markAttendanceHandler)
+	http.HandleFunc("/viewAttendanceReport", viewAttendanceReportHandler)
 
 	// Start the server
 	fmt.Println("Server started at http://localhost:8080")

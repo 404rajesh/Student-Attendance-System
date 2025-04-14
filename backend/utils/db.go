@@ -50,6 +50,11 @@ func InitDB() {
 	}
 
 	fmt.Println("✅ Database initialized successfully.")
+
+	if err := InitStudentTable(); err != nil {
+		log.Fatal("Failed to create students table:", err)
+	}
+
 }
 
 // Add a new user to the database
@@ -124,4 +129,72 @@ type Attendance struct {
 	UserID int    `json:"user_id"`
 	Date   string `json:"date"`
 	Status string `json:"status"`
+}
+
+// ======= Student Management Logic =======
+
+type Student struct {
+	ID         int    `json:"id"`
+	Roll       string `json:"roll"`
+	Name       string `json:"name"`
+	Email      string `json:"email"`
+	Department string `json:"department"`
+	Year       string `json:"year"`
+}
+
+// Create students table
+func InitStudentTable() error {
+	createStudentTable := `
+	CREATE TABLE IF NOT EXISTS students (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		roll TEXT UNIQUE,
+		name TEXT,
+		email TEXT,
+		department TEXT,
+		year TEXT
+	);
+	`
+	_, err := DB.Exec(createStudentTable)
+	return err
+}
+
+// Get all students
+func GetAllStudents() ([]Student, error) {
+	rows, err := DB.Query("SELECT id, roll, name, email, department, year FROM students")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var students []Student
+	for rows.Next() {
+		var s Student
+		err := rows.Scan(&s.ID, &s.Roll, &s.Name, &s.Email, &s.Department, &s.Year)
+		if err != nil {
+			return nil, err
+		}
+		students = append(students, s)
+	}
+	return students, nil
+}
+
+// Add a student
+func AddStudent(roll, name, email, department, year string) error {
+	query := "INSERT INTO students (roll, name, email, department, year) VALUES (?, ?, ?, ?, ?)"
+	_, err := DB.Exec(query, roll, name, email, department, year)
+	return err
+}
+
+// Update a student
+func UpdateStudent(id, roll, name, email, department, year string) error {
+	query := "UPDATE students SET roll=?, name=?, email=?, department=?, year=? WHERE id=?"
+	_, err := DB.Exec(query, roll, name, email, department, year, id)
+	return err
+}
+
+// Delete a student
+func DeleteStudent(id string) error {
+	query := "DELETE FROM students WHERE id=?"
+	_, err := DB.Exec(query, id)
+	return err
 }
