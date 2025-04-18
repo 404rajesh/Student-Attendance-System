@@ -59,9 +59,6 @@ async function handleLogin(e) {
 
       // ✅ Redirect to correct dashboard
       switch (result.role) {
-        case "admin":
-          window.location.href = "admin-dashboard.html";
-          break;
         case "student":
           window.location.href = "student-dashboard.html";
           break;
