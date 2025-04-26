@@ -1,23 +1,27 @@
 package main
 
 import (
-	"Student-Attendance-System/backend/handlers"
-	"Student-Attendance-System/backend/utils"
+	"Student-Attendance-System/backend/config"
+	"Student-Attendance-System/backend/routes"
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	// Initialize the database connection
-	utils.InitDB()
+	// Initialize database
+	config.ConnectDB()
 
-	// Set up HTTP routes
-	http.HandleFunc("/login", handlers.LoginHandler)
+	// Initialize the router
+	r := mux.NewRouter()
+
+	// Set up routes
+	routes.InitializeAuthRoutes(r)
+	routes.InitializeAttendanceRoutes(r)
 
 	// Start the server
-	fmt.Println("Server started at http://localhost:8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal("Server failed: ", err)
-	}
+	fmt.Println("Server running on port 8080...")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
