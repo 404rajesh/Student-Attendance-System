@@ -1,0 +1,22 @@
+# Ignore environment files
+.env
+*.env
+
+# Ignore system files
+.DS_Store
+
+# Ignore IDE/editor settings
+.vscode/
+.idea/
+
+# Ignore Go build files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Node.js (if using npm/yarn for frontend)
+node_modules/
