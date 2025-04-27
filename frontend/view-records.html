@@ -2,14 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>View Attendance Records</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Attendance Records</title>
   <link rel="stylesheet" href="css/view-records.css" />
 </head>
 <body>
   <div class="container">
     <h1>Your Attendance Records</h1>
-    <p>Feature coming soon...</p>
+    <div id="attendance-table-container">
+      <table id="attendance-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody id="attendance-table-body">
+          <!-- Attendance data will be inserted here -->
+        </tbody>
+      </table>
+    </div>
     <button onclick="goBack()">Back to Dashboard</button>
   </div>
 

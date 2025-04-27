@@ -1,79 +1,68 @@
-function showToast(message, duration = 3000) {
-  const toast = document.getElementById("toast");
-  toast.innerText = message;
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, duration);
-}
-
+// Show loader
 function showLoader() {
-  document.getElementById("loader").classList.remove("hidden");
+  document.getElementById('loader').classList.remove('hidden');
 }
 
+// Hide loader
 function hideLoader() {
-  document.getElementById("loader").classList.add("hidden");
+  document.getElementById('loader').classList.add('hidden');
 }
 
-async function handleLogin(e) {
-  e.preventDefault();
+// Show toast message
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
 
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const selectedRole = document.getElementById("role").value;
+// Handle login form submit
+async function handleLogin(event) {
+  event.preventDefault(); // prevent default form submission
 
-  if (!username || !password || !selectedRole) {
-    showToast("Please fill in all fields.");
+  const role = document.getElementById('role').value;
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (!username || !password) {
+    showToast('Please fill in all fields');
     return;
   }
 
   showLoader();
 
   try {
-    const response = await fetch("http://localhost:8080/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
+    const response = await fetch('http://localhost:8080/login', { // 🚀 Change URL if needed
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password, role })
     });
 
+    const data = await response.json();
     hideLoader();
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      showToast("Login failed: " + errorText);
-      return;
-    }
+    if (response.ok) {
+      showToast('Login successful!');
 
-    const result = await response.json();
+      // Save token to localStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user_id', data.user_id);
+      localStorage.setItem('role', role);
 
-    if (result.success) {
-      if (result.role !== selectedRole) {
-        showToast(`You are registered as a ${result.role}. Please select the correct role.`);
-        return;
-      }
-
-      // ✅ Save session info
-      localStorage.setItem("username", username);
-      localStorage.setItem("role", result.role);
-
-      // ✅ Redirect to correct dashboard
-      switch (result.role) {
-        case "student":
-          window.location.href = "student-dashboard.html";
-          break;
-        case "teacher":
-          window.location.href = "teacher-dashboard.html";
-          break;
-        default:
-          showToast("Unknown role. Contact support.");
+      // Redirect based on role
+      if (role === 'student') {
+        window.location.href = 'student-dashboard.html'; // ✅ Page for student
+      } else if (role === 'teacher') {
+        window.location.href = 'teacher.html'; // ✅ Page for teacher
       }
     } else {
-      showToast("Invalid credentials.");
+      showToast(data.error || 'Login failed!');
     }
-  } catch (err) {
+  } catch (error) {
     hideLoader();
-    console.error("Error during login:", err);
-    showToast("Server error. Please try again.");
+    console.error('Error:', error);
+    showToast('Something went wrong!');
   }
 }

@@ -14,7 +14,8 @@ type Attendance struct {
 	Time      time.Time `json:"time"`
 	Latitude  float64   `json:"latitude"`
 	Longitude float64   `json:"longitude"`
-	Status    string    `json:"status"` // 'Present' or 'Absent'
+	Status    string    `json:"status"`     // 'Present' or 'Absent'
+	ClassCode string    `json:"class_code"` // Optional, for manual code entry
 }
 
 // 👇 Tell GORM to use "attendance" table

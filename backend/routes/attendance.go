@@ -64,6 +64,14 @@ func MarkAttendance(w http.ResponseWriter, r *http.Request) {
 	attendance.Status = "Present"
 	attendance.UserID = userID
 
+	if attendance.ClassCode != "" { // Check if it's manual code attendance
+		// Add logic to match class code
+		if attendance.ClassCode != "validClassCode" {
+			http.Error(w, "Invalid class code", http.StatusBadRequest)
+			return
+		}
+	}
+
 	if err := attendance.MarkAttendance(config.DB); err != nil {
 		http.Error(w, "Error marking attendance", http.StatusInternalServerError)
 		return
